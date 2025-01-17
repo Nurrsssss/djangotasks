@@ -36,7 +36,7 @@ class PriorityViewSet(ModelViewSet):
     serializer_class = PrioritySerializer 
 
 
-logger = logging.getLogger(__name__) 
+
 class TaskViewSet(ModelViewSet):
     queryset = Task.objects.all()
     serializer_class = TaskSerializer
