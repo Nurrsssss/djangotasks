@@ -1,17 +1,23 @@
 from django.db import models
 
+from django.contrib.auth.models import AbstractUser, Group, Permission
 
-class User(models.Model): 
 
-    first_name = models.CharField(max_length=50) 
+class User(AbstractUser):
+    ROLE_CHOICES = [
+        ('admin', 'Admin'),
+        ('manager', 'Manager'),
+        ('employee', 'Employee'),
+    ]
+    
+    role = models.CharField(max_length=20, choices=ROLE_CHOICES, default='employee')
 
-    last_name = models.CharField(max_length=50) 
+    groups = models.ManyToManyField(Group, related_name="custom_user_groups", blank=True)
+    user_permissions = models.ManyToManyField(Permission, related_name="custom_user_permissions", blank=True)
 
-    email = models.EmailField(unique=True) 
+    def __str__(self):
+        return f"{self.username} ({self.role})"
 
-    def __str__(self): 
-
-        return f"{self.first_name} {self.last_name}" 
 
  
 

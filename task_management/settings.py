@@ -133,6 +133,12 @@ REST_FRAMEWORK = {
         'rest_framework.filters.SearchFilter',
     ],
     'PAGE_SIZE': 10,
+
+    'DEFAULT_AUTHENTICATION_CLASSES': [ 
+
+        'rest_framework_simplejwt.authentication.JWTAuthentication', 
+
+    ], 
 }
 LOGGING = { 
 

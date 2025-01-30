@@ -4,12 +4,15 @@ from .serializers import UserSerializer, ProjectSerializer, CategorySerializer, 
 from rest_framework.filters import SearchFilter
 from django_filters.rest_framework import DjangoFilterBackend
 import logging 
-
+#from rest_framework.permissions import IsAuthenticated 
+from .permissions import IsAdmin, IsManager, IsEmployee 
 class UserViewSet(ModelViewSet): 
 
     queryset = User.objects.all() 
 
     serializer_class = UserSerializer 
+
+    permission_classes = [IsAdmin] 
 
  
 
@@ -19,6 +22,8 @@ class ProjectViewSet(ModelViewSet):
 
     serializer_class = ProjectSerializer 
 
+    permission_classes = [IsManager] 
+
  
 
 class CategoryViewSet(ModelViewSet): 
@@ -26,6 +31,7 @@ class CategoryViewSet(ModelViewSet):
     queryset = Category.objects.all() 
 
     serializer_class = CategorySerializer 
+
 
  
 
@@ -43,6 +49,7 @@ class TaskViewSet(ModelViewSet):
     filter_backends = [DjangoFilterBackend, SearchFilter]
     filterset_fields = ['project', 'priority', 'category']
     search_fields = ['title', 'description']
+    permission_classes = [IsEmployee]
 
     def perform_create(self, serializer): 
 
