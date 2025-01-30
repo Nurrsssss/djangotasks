@@ -24,3 +24,4 @@ class IsEmployee(BasePermission):
 
         return request.user.is_authenticated and request.user.role in ['admin', 'manager', 'employee'] 
 
+  #ge,lf.

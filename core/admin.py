@@ -25,3 +25,4 @@ class TaskAdmin(admin.ModelAdmin):
 class ProjectAdmin(admin.ModelAdmin): 
 
     list_display = ('name', 'start_date', 'end_date') 
+    #fnjeksdml
